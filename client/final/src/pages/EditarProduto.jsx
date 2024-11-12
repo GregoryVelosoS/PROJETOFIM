@@ -32,7 +32,7 @@ const EditarProduto = () => {
   return (
     <div>
       <Container>
-        <h1>Cadastrar Produto</h1>
+        <h1>Editar Produto</h1>
         <form onSubmit={handleSubmit} className="mt-3">
           <Row>
             <Col xs={6}>
@@ -119,7 +119,7 @@ const EditarProduto = () => {
           </Alert>
 
           <Button variant="primary" size="lg" type="submit">
-            Cadastrar
+            Editar
           </Button>
         </form>
       </Container>

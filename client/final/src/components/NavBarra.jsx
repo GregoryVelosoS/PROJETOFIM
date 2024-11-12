@@ -14,7 +14,7 @@ const NavBarra = () => {
               <Nav.Link href="/home">Home</Nav.Link>
             </Nav>
             <Nav className="justify-content-end">            
-              <Nav.Link href="/cadastro">Cadastro</Nav.Link>
+              <Nav.Link href="/cadastrar">Cadastro</Nav.Link>
               <Nav.Link href="/login">Login</Nav.Link>              
             </Nav>
           </Navbar.Collapse>
