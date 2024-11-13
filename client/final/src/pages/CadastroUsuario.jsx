@@ -1,4 +1,4 @@
-//Importação dos components do react-bootstrap
+// Importação dos components do react-bootstrap utilizados
 import Container from "react-bootstrap/esm/Container";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
@@ -6,10 +6,10 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 
-//Importação do useState pra monitorar as variáveis
+// Importação do useState pra monitorar as variáveis 
 import { useState } from "react";
 
-//Importação do useNavigate pra mudança da página
+// Importação do useNavigate pra mudança da página
 import { useNavigate } from "react-router-dom";
 
 const CadastroUsuario = () => {
@@ -17,54 +17,56 @@ const CadastroUsuario = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [confirmaSenha, setConfirmaSenha] = useState("");
   const [tipo, setTipo] = useState("gerente");
+  const [confirmaSenha, setConfirmaSenha] = useState("");
 
   // variaveis pro alerta
   const [alertaClass, setAlertaClass] = useState("mb-3 d-none");
   const [alertaMensagem, setAlertaMensagem] = useState("");
 
-  //variável para o navigate
+  // variavel pro navigate
   const navigate = useNavigate();
 
+  // Função pra lidar com o envio do formulário
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    //Verificações de campo
+    
+    // Verificações de campo
     if (!nome == "") {
       if (!email == "") {
         if (!senha == "" && !confirmaSenha == "" && senha === confirmaSenha) {
-          //Crio um objeto com as informações preenchidas
+          
+          // Cria um objeto com as informações preenchidas
           const user = { nome, email, senha, tipo };
-
-          //Faz a requisição pra api criar o usuário
+          
+          // Faz a requisição a api pra criar o usuário
           const req = await fetch("http://localhost:5000/usuario/criar", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user),
           });
-
-          //Guarda o retorno da requisição
+          
+          //Guarda o retorno da requisição na variável res
           const res = req.json();
 
           //Caso o retorno da requisição tenha "usu_email", significa que já existe um usuário com este email, logo não posso cadastrá-lo
-          res
-            .then((resultado) => {
+          res.then((resultado) => {
               if (resultado.includes("usu_email")) {
                 setAlertaClass("mb-3");
-                setAlertaMensagem("Já existe um usuário com este email");
-              } else {
+                setAlertaMensagem("Já existe usuário com este email cadastrado")
+              } 
+              else {
                 alert("Usuário cadastrado com sucesso");
                 setNome("");
                 setEmail("");
                 setSenha("");
                 setConfirmaSenha("");
+                setTipo("");
                 navigate("/login");
               }
+              console.log(resultado);
             })
-            .catch((erro) => {
-              console.log(erro);
-            });
+            .catch((erro) => console.error(erro));
         } else {
           setAlertaClass("mb-3");
           setAlertaMensagem("As senhas não são iguais");
@@ -82,8 +84,8 @@ const CadastroUsuario = () => {
   return (
     <div>
       <Container>
-        {/* Logo */}
-        <span class="material-symbols-outlined" style={{ fontSize: "100px" }}>
+        {/* Logo*/}
+        <span className="material-symbols-outlined" style={{ fontSize: "100px" }}>
           person_add
         </span>
         <form onSubmit={handleSubmit}>
@@ -151,9 +153,9 @@ const CadastroUsuario = () => {
             />
           </FloatingLabel>
 
-          {/* select da do tipo do usuário*/}
+          {/* select da tipo de usuario*/}
           <Form.Group controlId="formGridTipo" className="mb-3">
-            <Form.Label>Tipo de Usuário</Form.Label>
+            <Form.Label>Tipo de usuário</Form.Label>
             <Form.Select
               value={tipo}
               onChange={(e) => {
@@ -161,28 +163,27 @@ const CadastroUsuario = () => {
               }}
             >
               <option value="gerente">Gerente</option>
-              <option value="funcionario">Funcionario</option>
+              <option value="funcionario">Funcionário</option>
             </Form.Select>
           </Form.Group>
 
-          {/* alerta caso tenha algum erro  */}
+        {/* Alerta, caso possua algum erro*/}
           <Alert key="danger" variant="danger" className={alertaClass}>
             {alertaMensagem}
           </Alert>
 
-          {/* botao para enviar o formulário */}
+        {/* Botão pra enviar o formulário*/}
           <Button variant="primary" type="submit">
             Cadastrar
           </Button>
         </form>
-
         <p>
-          Já tem cadastro?
+          Já tem cadastro? 
           <Nav.Link
             href="/login"
-            style={{ color: "blue", textDecoration: "underline" }}
+            style={{ color: "blue", textDecoration: "underline", display:"inline-block", marginLeft:"5px" }}
           >
-            Login
+          Login
           </Nav.Link>
         </p>
       </Container>
