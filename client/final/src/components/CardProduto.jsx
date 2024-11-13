@@ -21,7 +21,7 @@ const CardProduto = (props) => {
 
   return (
     <div>
-      <Card border="primary" style={{ width: "17rem", height: "26rem" }}>
+      <Card border="primary" style={{ width: "17rem", height: "30rem" }}>
         <Card.Img variant="top" src={props.imagemUrl} height="200px" />
         <Card.Body>
           <Card.Title>{props.nome} </Card.Title>

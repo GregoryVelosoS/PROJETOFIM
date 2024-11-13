@@ -22,7 +22,7 @@ function App() {
         <Route path="/home" element={<Home />}/>   
         <Route path="/cadastrar" element={<CadastroUsuario />}/>    
         <Route path="/produtos/cadastrar/" element={<CadastroProduto />}/>               
-        <Route path="/produtos/editar/" element={<EditarProduto />}/>           
+        <Route path="/produtos/editar/:id" element={<EditarProduto />}/>           
       </Routes>
      </BrowserRouter>
     </div>

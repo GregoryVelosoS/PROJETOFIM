@@ -64,7 +64,7 @@ const Home = () => {
             size="lg"
             className="mb-3 d-inline-flex justify-content-center"
             onClick={() => {
-              navigate("/produto/cadastrar/");
+              navigate("/produtos/cadastrar/");
             }}
           >
             <span
